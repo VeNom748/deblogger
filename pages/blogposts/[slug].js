@@ -2,17 +2,14 @@ import React, { useEffect, useState } from "react";
 // import { useRouter } from "next/router";
 import styles from "../../styles/Home.module.css";
 import blogcss from "../../styles/Blogs.module.css";
-import * as fs from "fs";
 
 //display all data in selected blog
 const Slug = (props) => {
-
   const [slugBlog, setslugBlog] = useState(props.parsed);
 
   function createMarkup() {
-    return { __html: slugBlog.content};
+    return { __html: slugBlog.content };
   }
-  
 
   // without server side rendering
   // const router = useRouter();
@@ -36,30 +33,25 @@ const Slug = (props) => {
             <h3>{slugBlog.readTime} to read.</h3>
           </div>
           <hr />
-          <p dangerouslySetInnerHTML={createMarkup()} ></p>
+          <p dangerouslySetInnerHTML={createMarkup()}></p>
         </div>
       </main>
     </div>
   );
 };
 
-
-
 // with server side rendering
 export async function getServerSideProps(context) {
   let slug = context.query.slug;
 
-  let blog = await fetch(`http://localhost:3000/api/getBlogs?slug=${slug}`)
+  let blog = await fetch(`http://localhost:3000/api/getBlogs?slug=${slug}`);
 
   const blogData = await blog.json();
 
   return {
-    props : { blogData }
-  }
+    props: { blogData },
+  };
 }
-
-
-
 
 // with statis site generation
 // export async function getStaticPaths() {
@@ -73,15 +65,14 @@ export async function getServerSideProps(context) {
 //     const jsonData = JSON.parse(blogData);
 
 //     slugs = [...slugs, { params: { slug: jsonData.slug } }]
-//   } 
-  
+//   }
+
 //   return {
 //     // passing data as a paths
 //     paths: slugs,
 //     fallback: false, // can also be true or 'blocking'
 //   };
 // }
-
 
 // export async function getStaticProps(context) {
 //   const { slug } = context.params;
