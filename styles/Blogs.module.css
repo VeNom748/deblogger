@@ -1,0 +1,40 @@
+.grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 65vw;
+}
+
+/* slug css */
+.title {
+  font-size: 55px;
+  margin: 70px 0px 0px 0px;
+}
+.blog_container {
+  width: 61vw;
+
+}
+.main{
+  min-height: 100vh;
+  padding: 0rem 0;
+  flex: 1 1;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.main h3{
+  color: rgb(153 153 153);
+  font-size: 17px;
+}
+.subtitle{
+  display: flex;
+  justify-content: space-between;
+}
+
+.blog_container p{
+  font-size: 17px;
+  line-height: 2;
+}
