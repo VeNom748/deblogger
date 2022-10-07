@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
-import fs from "fs";
+// import fs from "fs";
 
 export default function Home(props) {
   const [blogs, setblogs] = useState(props.blogData);
