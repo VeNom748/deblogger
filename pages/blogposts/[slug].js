@@ -46,53 +46,53 @@ const Slug = (props) => {
 
 
 // with server side rendering
-// export async function getServerSideProps(context) {
-//   let slug = context.query.slug;
+export async function getServerSideProps(context) {
+  let slug = context.query.slug;
 
-//   let blog = await fetch(`http://localhost:3000/api/getBlogs?slug=${slug}`)
+  let blog = await fetch(`http://localhost:3000/api/getBlogs?slug=${slug}`)
 
-//   const blogData = await blog.json();
+  const blogData = await blog.json();
 
-//   return {
-//     props : { blogData }
-//   }
-// }
+  return {
+    props : { blogData }
+  }
+}
 
 
 
 
 // with statis site generation
-export async function getStaticPaths() {
-  var allBlogs = await fs.promises.readdir("./Blogdata");
+// export async function getStaticPaths() {
+//   var allBlogs = await fs.promises.readdir("./Blogdata");
 
-  // empty object
-  var slugs = [];
+//   // empty object
+//   var slugs = [];
 
-  for (let index = 0; index < allBlogs.length; index++) {
-    const blogData = await fs.promises.readFile(`Blogdata/${allBlogs[index]}` , 'utf-8');
-    const jsonData = JSON.parse(blogData);
+//   for (let index = 0; index < allBlogs.length; index++) {
+//     const blogData = await fs.promises.readFile(`Blogdata/${allBlogs[index]}` , 'utf-8');
+//     const jsonData = JSON.parse(blogData);
 
-    slugs = [...slugs, { params: { slug: jsonData.slug } }]
-  } 
+//     slugs = [...slugs, { params: { slug: jsonData.slug } }]
+//   } 
   
-  return {
-    // passing data as a paths
-    paths: slugs,
-    fallback: false, // can also be true or 'blocking'
-  };
-}
+//   return {
+//     // passing data as a paths
+//     paths: slugs,
+//     fallback: false, // can also be true or 'blocking'
+//   };
+// }
 
 
-export async function getStaticProps(context) {
-  const { slug } = context.params;
+// export async function getStaticProps(context) {
+//   const { slug } = context.params;
 
-  const blog = await fs.promises.readFile(`Blogdata/${slug}.json`, "UTF-8");
+//   const blog = await fs.promises.readFile(`Blogdata/${slug}.json`, "UTF-8");
 
-  let parsed = JSON.parse(blog);
+//   let parsed = JSON.parse(blog);
 
-  return {
-    props: { parsed },
-  };
-}
+//   return {
+//     props: { parsed },
+//   };
+// }
 
 export default Slug;

@@ -59,34 +59,34 @@ const Blogs = (props) => {
 
 // server site rendering
 // this method runs in server side
-// export async function getServerSideProps(context) {
-//   let allBLogs = await fetch("http://localhost:3000/api/blog?count=6");
-//   let blogData = await allBLogs.json();
-
-//   return {
-//     props: { blogData }, // will be passed to the page component as props
-//   };
-// }
-
-// with statis site generation
-export async function getStaticProps(context) {
-  const files = await fs.promises.readdir("./Blogdata");
-  
-
-  let blogData = [];
-
-  for (let index = 0; index < files.length; index++) {
-    const fileData = await fs.promises.readFile(`./Blogdata/${files[index]}`);
-    blogData.push(JSON.parse(fileData));
-
-  }
-  const actualLenth = blogData.length
-
-  blogData = blogData.slice(0, 9)
+export async function getServerSideProps(context) {
+  let allBLogs = await fetch("http://localhost:3000/api/blog?count=6");
+  let blogData = await allBLogs.json();
 
   return {
-    props: { blogData  , actualLenth },
+    props: { blogData }, // will be passed to the page component as props
   };
 }
+
+// with statis site generation
+// export async function getStaticProps(context) {
+//   const files = await fs.promises.readdir("./Blogdata");
+  
+
+//   let blogData = [];
+
+//   for (let index = 0; index < files.length; index++) {
+//     const fileData = await fs.promises.readFile(`./Blogdata/${files[index]}`);
+//     blogData.push(JSON.parse(fileData));
+
+//   }
+//   const actualLenth = blogData.length
+
+//   blogData = blogData.slice(0, 9)
+
+//   return {
+//     props: { blogData  , actualLenth },
+//   };
+// }
 
 export default Blogs;

@@ -42,31 +42,31 @@ export default function Home(props) {
 
 // with server site rendering
 // getting only 4 blog post aas a populer one
-// export async function getServerSideProps(context) {
-//   const Blogs = await fetch("http://localhost:3000/api/blog");
+export async function getServerSideProps(context) {
+  const Blogs = await fetch("http://localhost:3000/api/blog");
 
-//   const blogData = await Blogs.json();
+  const blogData = await Blogs.json();
 
-//   const firstFourBlog = blogData.slice(0, 4);
-
-//   return {
-//     props: { firstFourBlog },
-//   };
-
-// }
-
-// wuth static site generation
-export async function getStaticProps(context) {
-  let blogs = await fs.promises.readdir("./Blogdata");
-
-  var blogData = [];
-  for (let index = 0; index < 4; index++) {
-    const fileData = await fs.promises.readFile(`./Blogdata/${blogs[index]}`, "utf-8");
-    blogData = [...blogData , JSON.parse(fileData) ]
-  }
-
+  const firstFourBlog = blogData.slice(0, 4);
 
   return {
-    props: { blogData }, // will be passed to the page component as props
+    props: { firstFourBlog },
   };
+
 }
+
+// wuth static site generation
+// export async function getStaticProps(context) {
+//   let blogs = await fs.promises.readdir("./Blogdata");
+
+//   var blogData = [];
+//   for (let index = 0; index < 4; index++) {
+//     const fileData = await fs.promises.readFile(`./Blogdata/${blogs[index]}`, "utf-8");
+//     blogData = [...blogData , JSON.parse(fileData) ]
+//   }
+
+
+//   return {
+//     props: { blogData }, // will be passed to the page component as props
+//   };
+// }
